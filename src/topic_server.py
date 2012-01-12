@@ -11,21 +11,16 @@ import copy
 
 class TopicServer:
 
-    def __init__(self, node_name, topic_name, server_name, topic_type, server_type):
+    def __init__(self, node_name, topic_name, server_name, topic_type, server_type, transform):
         rospy.init_node(topic_name)
+        self.data = None
+        self.acquired = False
         self.lock = threading.Lock()
         self.cv = threading.Condition(self.lock)
-        self.data = None
-        self.thread = threading.Thread(target=self.topicListener, args=(topic_name, topic_type))
-        self.thread.start()
-        self.acquired = False
+        rospy.Subscriber(topic_name, topic_type, self.topicCallback)
 
         self.service = rospy.Service(server_name, server_type, self.returnTopic)
-        self.server_type = server_type
-
-    def topicListener(self, topic_name, topic_type):
-        rospy.Subscriber(topic_name, topic_type, self.topicCallback)
-        rospy.spin()
+        self.transform = transform
 
     def topicCallback(self, msg):
         """
@@ -40,14 +35,14 @@ class TopicServer:
         self.cv.acquire()
 
         if self.acquired is False:
-            self.data = copy.deepcopy(msg) # alt: self.data = msg
+            self.data = msg
             self.acquired = True
             self.cv.notify()
 
         self.cv.release()
 
-    def __del__(self):
-        pass
+    def spin(self):
+        rospy.spin()
 
     def returnTopic(self, req):
         self.cv.acquire()
@@ -58,7 +53,7 @@ class TopicServer:
             self.cv.wait()
 
         self.cv.release()
-        return self.data.data
+        return self.transform(self.data)
 
 if __name__ == "__main__":
 
@@ -66,4 +61,8 @@ if __name__ == "__main__":
     from std_msgs.msg import String
     from topic_server.srv import StringSrv
 
-    ts = TopicServer('test', 'chatter','chat_server', String, StringSrv)
+    def transform(msg):
+        return msg.data
+
+    ts = TopicServer('test', 'chatter','chat_server', String, StringSrv, transform)
+    ts.spin()
