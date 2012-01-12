@@ -5,7 +5,7 @@ import struct
 
 class StringSrvRequest(roslib.message.Message):
   _md5sum = "d41d8cd98f00b204e9800998ecf8427e"
-  _type = "topic_server/StringSrvRequest"
+  _type = "topic_service/StringSrvRequest"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """
 """
@@ -94,7 +94,7 @@ import struct
 
 class StringSrvResponse(roslib.message.Message):
   _md5sum = "992ce8a1687cec8c8bd883ec73ca41d1"
-  _type = "topic_server/StringSrvResponse"
+  _type = "topic_service/StringSrvResponse"
   _has_header = False #flag to mark the presence of a Header object
   _full_text = """string data
 
@@ -199,7 +199,7 @@ class StringSrvResponse(roslib.message.Message):
 
 _struct_I = roslib.message.struct_I
 class StringSrv(roslib.message.ServiceDefinition):
-  _type          = 'topic_server/StringSrv'
+  _type          = 'topic_service/StringSrv'
   _md5sum = '992ce8a1687cec8c8bd883ec73ca41d1'
   _request_class  = StringSrvRequest
   _response_class = StringSrvResponse

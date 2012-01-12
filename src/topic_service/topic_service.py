@@ -2,7 +2,7 @@
 
 # A service to listen and return data from a topic.
 
-import roslib; roslib.load_manifest('topic_server')
+import roslib; roslib.load_manifest('topic_service')
 import rospy
 import threading
 import copy
