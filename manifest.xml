@@ -1,13 +1,13 @@
 <package>
-  <description brief="topic_server">
+  <description brief="topic_service">
 
-     topic_server
+     topic_service
 
   </description>
   <author>Jeremy Stober</author>
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
-  <url>http://ros.org/wiki/topic_server</url>
+  <url>http://ros.org/wiki/topic_service</url>
 
   <depend package="rospy" />
   <depend package="std_msgs" />
