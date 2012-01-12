@@ -47,15 +47,3 @@ class TopicServer:
 
         self.cv.release()
         return self.transform(self.data)
-
-if __name__ == "__main__":
-
-    # Testing code assumes that "rosrun rospy_tutorials talker.py" has been called.
-    from std_msgs.msg import String
-    from topic_server.srv import StringSrv
-
-    def transform(msg):
-        return msg.data
-
-    ts = TopicServer('test', 'chatter','chat_server', String, StringSrv, transform)
-    ts.spin()
