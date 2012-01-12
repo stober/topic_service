@@ -7,7 +7,7 @@ import rospy
 import threading
 import copy
 
-class TopicService:
+class Topic2Service:
 
     def __init__(self, node_name, topic_name, server_name, topic_type, server_type, transform):
         rospy.init_node(node_name)

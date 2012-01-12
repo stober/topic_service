@@ -10,12 +10,12 @@ import roslib; roslib.load_manifest('topic_service')
 import rospy
 from std_msgs.msg import String
 from topic_service.srv import StringSrv
-from topic_service import TopicService
+from topic_service import Topic2Service
 
 def transform(msg):
     return msg.data
 
-ts = TopicService('test', 'chatter','chat_service', String, StringSrv, transform)
+ts = Topic2Service('test', 'chatter','chat_service', String, StringSrv, transform)
 ts.spin()
 
 
