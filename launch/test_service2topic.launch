@@ -1,0 +1,4 @@
+<launch>
+  <node name="add_two_ints" pkg="rospy_tutorials" type="add_two_ints_server" output="screen" />
+  <node name="topic_service" pkg="topic_service" type="test_service2topic.py" output="screen" />
+</launch>

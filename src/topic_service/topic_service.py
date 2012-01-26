@@ -5,7 +5,31 @@
 import roslib; roslib.load_manifest('topic_service')
 import rospy
 import threading
-import copy
+
+class Service2Topic:
+
+    def __init__(self, node_name, topic_name, server_name, topic_type, server_type, hz, transform, default = None):
+        rospy.init_node(node_name)
+        self.rate = rospy.Rate(hz)
+        self.params = default
+        self.transform = transform
+
+        self.server_name = server_name
+        self.service = rospy.ServiceProxy(server_name, server_type)
+        self.topic = rospy.Publisher(topic_name, topic_type)
+        self.topic_name = topic_name
+
+    def check_params(self):
+        if rospy.has_param(self.topic_name + "_parameters"):
+            self.params = rospy.get_param(self.topic_name + "_parameters")
+
+    def spin(self):
+        rospy.wait_for_service(self.server_name)
+        while not rospy.is_shutdown():
+            self.check_params() # look for changes to the parameters
+            data = self.service(**self.params)
+            self.topic.publish(self.transform(data))
+            self.rate.sleep()
 
 class Topic2Service:
 
