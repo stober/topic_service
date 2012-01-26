@@ -1,0 +1,10 @@
+ROS Topic/Service Translation
+
+Author: Jeremy Stober
+Contact: stober@gmail.com
+Version: 0.01
+
+This package provides a node for translating between topics and
+services in ROS. See the test code in bin/ and the launch files for
+examples for how to translate ROS services into topics or topics into
+services.
