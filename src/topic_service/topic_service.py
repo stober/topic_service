@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# A service to listen and return data from a topic.
+# A service to listen and return data from a topic. Or a topic that polls a service.
 
 import roslib; roslib.load_manifest('topic_service')
 import rospy

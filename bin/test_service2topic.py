@@ -1,9 +1,9 @@
 #! /usr/bin/env python
 """
 Author: Jeremy M. Stober
-Program: TEST_TOPIC_SERVICE.PY
+Program: TEST_SERVICE2TOPIC.PY
 Date: Thursday, January 12 2012
-Description: Test topic service. See test.launch.
+Description: Test topic service.
 """
 
 import roslib; roslib.load_manifest('topic_service')
